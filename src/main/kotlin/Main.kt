@@ -1,6 +1,6 @@
 package ru.netology
 
 fun main() {
-    agoToTextDemo()
+    //agoToTextDemo()
     calculateCommissionDemo()
 }
