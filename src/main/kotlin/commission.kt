@@ -14,10 +14,10 @@ fun calculateCommission(transactionSum: Int,
         throw IllegalArgumentException("Negative month sum")
     }
     if (transactionSum > transactionLimit) {
-        throw OverLimitException("Transaction sum")
+        throw OverLimitException("Транзакция запрещена - сумма перевода превышает лимит")
     }
     if ((monthSum + transactionSum) > monthLimit) {
-        throw OverLimitException("Month sum")
+        throw OverLimitException("Транзакция запрещена - превышен лимит за месяц")
     }
     if (cardType == "Mastercard") {
         // За переводы с карты Mastercard комиссия не взимается,
@@ -56,7 +56,12 @@ fun calculateCommissionDemo() {
             return
         }
         val card = menu("Выберите тип карты", listOf("Visa", "Mastercard", "Мир"))
-        val commission = calculateCommission(transactionSum, monthSum, card, transactionLimit, monthLimit)
-        println("Комиссия составляет $commission р.")
+        try {
+            val commission = calculateCommission(transactionSum, monthSum, card, transactionLimit, monthLimit)
+            println("Комиссия составляет $commission р.")
+        } catch (e: OverLimitException) {
+            println(e.message)
+        }
+
     }
 }
