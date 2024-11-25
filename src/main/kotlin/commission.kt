@@ -1,4 +1,5 @@
-package ru.netology
+import ru.netology.intInput
+import ru.netology.menu
 
 
 class OverLimitException(text: String) : Exception(text)
@@ -7,12 +8,6 @@ class OverLimitException(text: String) : Exception(text)
 fun calculateCommission(transactionSum: Int,
                         monthSum: Int = 0,
                         cardType: String = "Мир", transactionLimit: Int, monthLimit: Int): Int {
-    if (transactionSum < 0) {
-        throw IllegalArgumentException("Negative transaction sum")
-    }
-    if (monthSum < 0) {
-        throw IllegalArgumentException("Negative month sum")
-    }
     if (transactionSum > transactionLimit) {
         throw OverLimitException("Транзакция запрещена - сумма перевода превышает лимит")
     }
