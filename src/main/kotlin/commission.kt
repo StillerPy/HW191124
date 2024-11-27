@@ -18,10 +18,12 @@ fun calculateCommission(transactionSum: Int,
         // За переводы с карты Mastercard комиссия не взимается,
         // пока не превышен месячный лимит в 75 000 руб.
         // Если лимит превышен, комиссия составит 0,6% + 20 руб.
-        if (monthSum <= 75_000) {
+        if (monthSum + transactionSum <= 75_000) {
             return 0
-        } else {
+        } else if (monthSum >= 75_000) {
             return (transactionSum * 0.006 + 20).toInt()
+        } else {
+            return ((transactionSum - 75_000) * 0.006 + 20).toInt()
         }
     } else if (cardType == "Visa") {
         // За переводы с карты Visa комиссия составит 0,75%,
